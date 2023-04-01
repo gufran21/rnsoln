@@ -7,11 +7,17 @@
  import paidCourseRoutes from "./routes/paidCourseRoute.js";
  import otherRoutes from "./routes/otherRoutes.js";
  import subcriptionRoutes from './subscription/subsciptionRoute.js'
+ import cors from 'cors'
  config({
     path:"./config/config.env"
  })
 const app=express()
 app.use(cookieParser())
+app.use(cors({
+   origin:process.env.FRONTEND_URL,
+   credentials:true,
+   methods:["POST","GET","DELETE","PUT"]
+}))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use('/api',courseRoutes)
